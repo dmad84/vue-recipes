@@ -16,6 +16,7 @@
       </tr>
     </tbody>
   </table>
+  <button @click="addRecipe">Add Recipe</button>
   </div>
 </template>
 
@@ -33,6 +34,14 @@ export default {
   firestore () {
     return {
       recipes: db.collection('recipes').orderBy('createdAt')
+    }
+  },
+  methods: {
+    addRecipe () {
+      const name = 'new recipe'
+      const details = 'A brand new recipe'
+      const createdAt = new Date()
+      db.collection('recipes').add({ name, details, createdAt })
     }
   }
 }
