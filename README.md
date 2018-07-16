@@ -1,2 +1,2 @@
 # vue-recipes
-A vue.js recipes website with firebase
+A vue.js recipes website with firebase and firestore
