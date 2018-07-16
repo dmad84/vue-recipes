@@ -6,6 +6,7 @@ import router from './router'
 import VueFire from 'vuefire'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+require('../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss')
 
 Vue.use(VueFire)
 
@@ -17,6 +18,7 @@ var config = {
   storageBucket: 'vue-recipes-site.appspot.com',
   messagingSenderId: '475258414126'
 }
+
 firebase.initializeApp(config)
 const settings = {timestampsInSnapshots: true}
 firebase.firestore().settings(settings)
