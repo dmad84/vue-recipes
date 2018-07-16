@@ -1,0 +1,57 @@
+<template>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <h2>Recipes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Recipe</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+    <tbody>
+      <tr v-for="(recipe, idx) in recipes" :key="idx">
+        <td>{{ recipe.name }}</td>
+        <td>{{ recipe.details }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</template>
+
+<script>
+import { db } from '../main'
+
+export default {
+  name: 'HelloWorld',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      recipes: []
+    }
+  },
+  firestore () {
+    return {
+      recipes: db.collection('recipes').orderBy('createdAt')
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
