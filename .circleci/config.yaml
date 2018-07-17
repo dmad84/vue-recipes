@@ -1,25 +1,36 @@
-version: 2
-jobs:
-  build:
-    working_directory: ~/repo
-    machine:
-      node:
-        version: 8.9.1
-    dependencies:
-      override:
-        - nvm install 8 && npm install
-    test:
-      override:
-        - nvm use 8 && npm run test-server-all
-        - nvm use 8 && npm run ci
-    steps:
-      - checkout
-      - run: npm install
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/repo # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/node:8.9.1 # ...with this image as the primary container; this is where all `steps` will run
+      - image: mongo:3.4.4 # and this image as the secondary service container
+    steps: # a collection of executable commands 
+      - checkout # special step to check out source code to working directory
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache 
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: # run tests
+          name: test
+          command: npm test
       - run: npm run build
-      - run: npm run test
-      # - run: $(npm bin)/cypress run --record
-
-      - deploy:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+      - run: # run coverage report
+          name: code-coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts: # special step to save test results as as artifact
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results: # special step to upload test results for display in Test Summary
+          path: test-results.xml
