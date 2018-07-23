@@ -8,15 +8,22 @@
           <tr>
             <th>Recipe Name</th>
             <th>Details</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(recipe, idx) in recipes" :key="idx">
             <td>{{ recipe.name }}</td>
             <td>{{ recipe.details }}</td>
+            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe.id)"></span></td>
           </tr>
         </tbody>
       </table>
+      <label for="recipeName">Recipe Title</label>
+      <input type="text" v-model="recipeName" id="recipeName">
+      <br>
+      <textarea rows="4" cols="50" v-model="recipeDetails">
+      </textarea>
       <button @click="addRecipe">Add Recipe</button>
     </div>
   </div>
@@ -30,7 +37,9 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      recipes: []
+      recipes: [],
+      recipeName: '',
+      recipeDetails: ''
     }
   },
   firestore () {
@@ -40,10 +49,13 @@ export default {
   },
   methods: {
     addRecipe () {
-      const name = 'new recipe'
-      const details = 'A brand new recipe'
+      const name = this.recipeName
+      const details = this.recipeDetails
       const createdAt = new Date()
       db.collection('recipes').add({ name, details, createdAt })
+    },
+    removeRecipe (id) {
+      db.collection('recipes').doc(id).delete()
     }
   }
 }
