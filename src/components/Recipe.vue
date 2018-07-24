@@ -12,47 +12,52 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(recipe, idx) in recipes.recipesInFeed" :key="idx">
+          <tr v-for="(recipe, idx) in recipes" :key="idx">
             <td>{{ recipe.name }}</td>
             <td>{{ recipe.details }}</td>
-            <!-- <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe.id)"></span></td> -->
+            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe.id)"></span></td>
           </tr>
         </tbody>
       </table>
-      <!-- <label for="recipeName">Recipe Title</label>
+      <label for="recipeName">Recipe Title</label>
       <input type="text" v-model="recipeName" id="recipeName">
       <br>
       <textarea rows="4" cols="50" v-model="recipeDetails">
       </textarea>
-      <button @click="addRecipe">Add Recipe</button> -->
+      <button @click="addRecipe">Add Recipe</button>
     </div>
   </div>
 </template>
 
 <script>
-import { store } from '../store'
+import { db } from '../main'
 
 export default {
-  name: 'Recipes',
+  name: 'Recipe',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      recipes: store.state,
+      recipes: [],
       recipeName: '',
       recipeDetails: ''
     }
+  },
+  firestore () {
+    return {
+      recipes: db.collection('recipes').orderBy('createdAt')
+    }
+  },
+  methods: {
+    addRecipe () {
+      const name = this.recipeName
+      const details = this.recipeDetails
+      const createdAt = new Date()
+      db.collection('recipes').add({ name, details, createdAt })
+    },
+    removeRecipe (id) {
+      db.collection('recipes').doc(id).delete()
+    }
   }
-  // methods: {
-  //   addRecipe () {
-  //     const name = this.recipeName
-  //     const details = this.recipeDetails
-  //     const createdAt = new Date()
-  //     db.collection('recipes').add({ name, details, createdAt })
-  //   },
-  //   removeRecipe (id) {
-  //     db.collection('recipes').doc(id).delete()
-  //   }
-  // }
 }
 </script>
 
