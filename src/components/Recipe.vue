@@ -22,7 +22,8 @@
       <label for="recipeName">Recipe Title</label>
       <input type="text" v-model="recipeName" id="recipeName">
       <br>
-      <textarea rows="4" cols="50" v-model="recipeDetails">
+      <label for="recipeDetails">Recipe Details</label>
+      <textarea rows="4" cols="50" v-model="recipeDetails" id="recipeDetails">
       </textarea>
       <button @click="addRecipe">Add Recipe</button>
     </div>
