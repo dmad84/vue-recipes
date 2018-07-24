@@ -15,7 +15,7 @@
           <tr v-for="(recipe, idx) in recipes" :key="idx">
             <td>{{ recipe.name }}</td>
             <td>{{ recipe.details }}</td>
-            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe.id)"></span></td>
+            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)"></span></td>
           </tr>
         </tbody>
       </table>
@@ -25,40 +25,26 @@
       <label for="recipeDetails">Recipe Details</label>
       <textarea rows="4" cols="50" v-model="recipeDetails" id="recipeDetails">
       </textarea>
-      <button @click="addRecipe">Add Recipe</button>
+      <button @click="addRecipe(recipeName, recipeDetails, createdAt)">Add Recipe</button>
     </div>
   </div>
 </template>
 
 <script>
-import { db } from '../main'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Recipe',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      recipes: [],
       recipeName: '',
-      recipeDetails: ''
+      recipeDetails: '',
+      createdAt: new Date()
     }
   },
-  firestore () {
-    return {
-      recipes: db.collection('recipes').orderBy('createdAt')
-    }
-  },
-  methods: {
-    addRecipe () {
-      const name = this.recipeName
-      const details = this.recipeDetails
-      const createdAt = new Date()
-      db.collection('recipes').add({ name, details, createdAt })
-    },
-    removeRecipe (id) {
-      db.collection('recipes').doc(id).delete()
-    }
-  }
+  computed: mapState(['recipes']),
+  methods: mapActions(['addRecipe', 'removeRecipe'])
 }
 </script>
 
