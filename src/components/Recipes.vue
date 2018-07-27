@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <tr v-for="(recipe, idx) in recipes" :key="idx">
-            <td>{{ recipe.name }}</td>
+            <td><router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link></td>
             <td>{{ recipe.details }}</td>
             <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)"></span></td>
           </tr>

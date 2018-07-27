@@ -24,5 +24,10 @@ export default new Vuex.Store({
       firestore.removeRecipe(recipe.id)
       commit('removeRecipe', recipe)
     }
+  },
+  getters: {
+    getRecipeByID: (state) => (id) => {
+      return state.recipes.find(recipe => recipe.id === id)
+    }
   }
 })
