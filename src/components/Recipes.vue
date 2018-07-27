@@ -19,13 +19,17 @@
           </tr>
         </tbody>
       </table>
-      <label for="name">Recipe Title</label>
-      <input type="text" v-model="name" id="name">
-      <br>
-      <label for="details">Recipe Details</label>
-      <textarea rows="4" cols="50" v-model="details" id="details">
-      </textarea>
-      <button @click="addRecipe({name, details, createdAt})">Add Recipe</button>
+      <form>
+        <div class="form-group">
+          <label for="name">Recipe Title</label>
+          <input type="text" class="form-control" v-model="name" id="name">
+        </div>
+        <div class="form-group">
+          <label for="details">Recipe Details</label>
+          <textarea class="form-control"  rows="4" cols="50" v-model="details" id="details"></textarea>
+        </div>
+        <button @click="addRecipe({name, details, createdAt})" class="btn btn-primary float-right">Add Recipe</button>
+      </form>
     </div>
   </div>
 </template>
@@ -34,7 +38,7 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  name: 'Recipe',
+  name: 'Recipes',
   data () {
     return {
       msg: '',
