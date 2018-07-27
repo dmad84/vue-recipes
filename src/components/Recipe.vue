@@ -19,13 +19,13 @@
           </tr>
         </tbody>
       </table>
-      <label for="recipeName">Recipe Title</label>
-      <input type="text" v-model="recipeName" id="recipeName">
+      <label for="name">Recipe Title</label>
+      <input type="text" v-model="name" id="name">
       <br>
-      <label for="recipeDetails">Recipe Details</label>
-      <textarea rows="4" cols="50" v-model="recipeDetails" id="recipeDetails">
+      <label for="details">Recipe Details</label>
+      <textarea rows="4" cols="50" v-model="details" id="details">
       </textarea>
-      <button @click="addRecipe(recipeName, recipeDetails, createdAt)">Add Recipe</button>
+      <button @click="addRecipe({name, details, createdAt})">Add Recipe</button>
     </div>
   </div>
 </template>
@@ -37,9 +37,9 @@ export default {
   name: 'Recipe',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      recipeName: '',
-      recipeDetails: '',
+      msg: '',
+      name: '',
+      details: '',
       createdAt: new Date()
     }
   },

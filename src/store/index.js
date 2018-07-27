@@ -17,8 +17,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    addRecipe ({ commit }, [recipeName, recipeDetails, createdAt]) {
-      firestore.addRecipe(recipeName, recipeDetails, createdAt)
+    addRecipe ({ commit }, recipe) {
+      firestore.addRecipe(recipe)
     },
     removeRecipe ({ commit }, recipe) {
       firestore.removeRecipe(recipe.id)

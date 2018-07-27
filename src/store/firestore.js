@@ -38,12 +38,8 @@ export default {
     return recipes.get()
   },
 
-  addRecipe: (recipeName, recipeDetails, createdAt) => {
-    return recipes.add({
-      recipeName,
-      recipeDetails,
-      createdAt
-    })
+  addRecipe: (recipe) => {
+    return recipes.add(recipe)
   },
 
   removeRecipe: id => {
