@@ -29,7 +29,7 @@
           <label for="details">Recipe Details</label>
           <textarea class="form-control"  rows="4" cols="50" v-model="details" id="details"></textarea>
         </div>
-        <button @click="addRecipe({name, details, createdAt})" class="btn btn-primary float-right">Add Recipe</button>
+        <button @click="addRecipe({name, details, createdAt})" class="btn btn-success float-right">Add Recipe</button>
       </form>
     </div>
   </div>
@@ -55,9 +55,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
 ul {
   list-style-type: none;
   padding: 0;
@@ -67,7 +64,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #217f54;
 }
 .loader {
   animation: spin 2s linear infinite;

@@ -1,8 +1,15 @@
 <template>
-    <div>
-        <h2>{{ recipe.name }}</h2>
-        <p>{{ recipe.details }}</p>
+ <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+        <div>
+            <h2>{{ recipe.name }}</h2>
+            <p>{{ recipe.details }}</p>
+        </div>
+        <router-link to="/">
+            <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
+        </router-link>
     </div>
+ </div>
 </template>
 
 <script>
@@ -24,3 +31,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn:hover {
+    color: #fff;
+  }
+</style>
