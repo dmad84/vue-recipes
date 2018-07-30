@@ -19,22 +19,14 @@
             <td><router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link></td>
             <td>{{ recipe.details }}</td>
             <td>{{ recipe.createdAt.toDate().toLocaleString() }}</td>
-            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)"></span></td>
+            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)" title="delete recipe"></span></td>
           </tr>
         </tbody>
       </table>
       <div class="loader" v-else></div>
-      <form>
-        <div class="form-group">
-          <label for="name">Recipe Title</label>
-          <input type="text" class="form-control" v-model="name" id="name">
-        </div>
-        <div class="form-group">
-          <label for="details">Recipe Details</label>
-          <textarea class="form-control"  rows="4" cols="50" v-model="details" id="details"></textarea>
-        </div>
-        <button @click="addRecipe({name, details, createdAt})" class="btn btn-success float-right" type="button">Add Recipe</button>
-      </form>
+      <router-link to="/addRecipe">
+            <button id="myButton" class="btn btn-primary float-right">Add Recipes</button>
+        </router-link>
     </div>
   </div>
 </template>
@@ -46,14 +38,11 @@ export default {
   name: 'Recipes',
   data () {
     return {
-      msg: '',
-      name: '',
-      details: '',
-      createdAt: new Date()
+      msg: ''
     }
   },
   computed: mapState(['recipes']),
-  methods: mapActions(['addRecipe', 'removeRecipe'])
+  methods: mapActions(['removeRecipe'])
 }
 </script>
 
@@ -80,7 +69,12 @@ a {
   height: 40px;
   margin: 30px auto;
 }
-
+.glyphicon-trash {
+  cursor: pointer;
+}
+img {
+  width: 15px;
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
