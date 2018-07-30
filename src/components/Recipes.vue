@@ -6,21 +6,25 @@
       <table class="table" v-if="recipes.length > 0">
         <thead>
           <tr>
+            <th></th>
             <th>Recipe Name</th>
             <th>Details</th>
+            <th>created At</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(recipe, idx) in recipes" :key="idx">
+            <td><img :src="recipe.image"></td>
             <td><router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link></td>
             <td>{{ recipe.details }}</td>
+            <td>{{ recipe.createdAt.toDate().toLocaleString() }}</td>
             <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)"></span></td>
           </tr>
         </tbody>
       </table>
       <div class="loader" v-else></div>
-      <form>
+      <form @submit="addRecipe({name, details, createdAt})">
         <div class="form-group">
           <label for="name">Recipe Title</label>
           <input type="text" class="form-control" v-model="name" id="name">
@@ -29,7 +33,7 @@
           <label for="details">Recipe Details</label>
           <textarea class="form-control"  rows="4" cols="50" v-model="details" id="details"></textarea>
         </div>
-        <button @click="addRecipe({name, details, createdAt})" class="btn btn-success float-right">Add Recipe</button>
+        <button type="submit" class="btn btn-success float-right">Add Recipe</button>
       </form>
     </div>
   </div>
