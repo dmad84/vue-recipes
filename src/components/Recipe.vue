@@ -1,10 +1,13 @@
 <template>
  <div class="row justify-content-center">
     <div class="col-12 col-md-8">
-        <div>
+        <article>
             <h2>{{ recipe.name }}</h2>
             <p>{{ recipe.details }}</p>
-        </div>
+            <ol v-for="(step, idx) in recipe.steps" :key="idx" v-if="recipe.steps && recipe.steps.length > 0">
+              <li>{{ step }}</li>
+            </ol>
+        </article>
         <router-link to="/">
             <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
         </router-link>
