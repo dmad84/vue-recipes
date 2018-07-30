@@ -24,7 +24,7 @@
         </tbody>
       </table>
       <div class="loader" v-else></div>
-      <form @submit="addRecipe({name, details, createdAt})">
+      <form>
         <div class="form-group">
           <label for="name">Recipe Title</label>
           <input type="text" class="form-control" v-model="name" id="name">
@@ -33,7 +33,7 @@
           <label for="details">Recipe Details</label>
           <textarea class="form-control"  rows="4" cols="50" v-model="details" id="details"></textarea>
         </div>
-        <button type="submit" class="btn btn-success float-right">Add Recipe</button>
+        <button @click="addRecipe({name, details, createdAt})" class="btn btn-success float-right" type="button">Add Recipe</button>
       </form>
     </div>
   </div>
