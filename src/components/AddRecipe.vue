@@ -35,8 +35,8 @@
             <router-link to="/">
               <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
             </router-link>
-            <button @click="addRecipe()" class="btn btn-success float-right" type="button">Add Recipe</button>
-            <button @click="updateRecipe()" class="btn btn-success float-right" type="button">Save Recipe</button>
+            <button @click="addRecipe()" class="btn btn-success float-right" type="button" v-if="!isEdit">Add Recipe</button>
+            <button @click="updateRecipe()" class="btn btn-success float-right" type="button"  v-if="isEdit">Save Recipe</button>
           </div>
         </div>
       </form>
@@ -56,7 +56,8 @@ export default {
       recipe: {
         steps: ['']
       },
-      success: false
+      success: false,
+      isEdit: false
     }
   },
   computed: {
@@ -65,6 +66,7 @@ export default {
   created () {
     if (this.id && this.id.length > 0) {
       this.recipe = this.getRecipeByID(this.id)
+      this.isEdit = true
     }
   },
   methods: {
