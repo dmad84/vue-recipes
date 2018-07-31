@@ -20,6 +20,9 @@ export default new Vuex.Store({
     addRecipe ({ commit }, recipe) {
       firestore.addRecipe(recipe)
     },
+    updateRecipe ({ commit }, recipe) {
+      firestore.updateRecipe(recipe)
+    },
     removeRecipe ({ commit }, recipe) {
       firestore.removeRecipe(recipe.id)
       commit('removeRecipe', recipe)

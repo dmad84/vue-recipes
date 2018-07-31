@@ -11,6 +11,9 @@
         <router-link to="/">
             <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
         </router-link>
+       <router-link :to="{ path: '/EditRecipe/' + id }">
+            <button id="myButton" class="btn btn-primary">Edit</button>
+        </router-link>
     </div>
  </div>
 </template>

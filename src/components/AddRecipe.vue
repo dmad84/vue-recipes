@@ -36,6 +36,7 @@
               <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
             </router-link>
             <button @click="addRecipe()" class="btn btn-success float-right" type="button">Add Recipe</button>
+            <button @click="updateRecipe()" class="btn btn-success float-right" type="button">Save Recipe</button>
           </div>
         </div>
       </form>
@@ -44,16 +45,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import store from '../store/index.js'
 
 export default {
   name: 'AddRecipe',
+  props: ['id'],
   data () {
     return {
       recipe: {
         steps: ['']
       },
       success: false
+    }
+  },
+  computed: {
+    ...mapGetters(['getRecipeByID'])
+  },
+  created () {
+    if (this.id && this.id.length > 0) {
+      this.recipe = this.getRecipeByID(this.id)
     }
   },
   methods: {
@@ -68,7 +79,10 @@ export default {
         var self = this
         setTimeout(function () {
           self.success = false
-        }, 3000)
+        }, 1000)
+        setTimeout(function () {
+          location.href = '/recipes'
+        }, 1005)
       })
     },
     addStep: function () {
@@ -76,6 +90,16 @@ export default {
     },
     removeStep: function (index) {
       this.recipe.steps.splice(index, 1)
+    },
+    updateRecipe: function () {
+      store.dispatch('updateRecipe', this.recipe).then(() => {
+        console.log('success')
+        this.success = true
+        var self = this
+        setTimeout(function () {
+          self.success = false
+        }, 3000)
+      })
     }
   }
 }

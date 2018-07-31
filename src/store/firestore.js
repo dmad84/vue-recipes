@@ -42,6 +42,10 @@ export default {
     return recipes.add(recipe)
   },
 
+  updateRecipe: (recipe) => {
+    return recipes.doc(recipe.id).set(recipe)
+  },
+
   removeRecipe: id => {
     return recipes.doc(id).delete()
   }

@@ -23,6 +23,12 @@ export default new Router({
       name: 'Recipe',
       component: Recipe,
       props: true
+    },
+    {
+      path: '/EditRecipe/:id',
+      name: 'EditRecipe',
+      component: AddRecipe,
+      props: true
     }
   ]
 })
