@@ -4,9 +4,9 @@
         <article>
             <h2>{{ recipe.name }}</h2>
             <p>{{ recipe.details }}</p>
-            <ol v-for="(step, idx) in recipe.steps" :key="idx" v-if="recipe.steps && recipe.steps.length > 0">
-              <li>{{ step }}</li>
-            </ol>
+            <ul v-for="(step, idx) in recipe.steps" :key="idx" v-if="recipe.steps && recipe.steps.length > 0">
+              <li>{{ idx+1 }}. {{ step }}</li>
+            </ul>
         </article>
         <router-link to="/">
             <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
@@ -41,5 +41,9 @@ export default {
 <style scoped>
 .btn:hover {
     color: #fff;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
   }
 </style>
