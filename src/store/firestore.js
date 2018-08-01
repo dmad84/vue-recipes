@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import store from './'
+import _ from 'lodash'
 
 var config = {
   apiKey: 'AIzaSyC8HFOu2r1poOpchyCOOjvJsThmXASk98o',
@@ -30,7 +31,7 @@ recipes.onSnapshot(querySnapshot => {
       ...doc.data()
     })
   })
-  store.commit('watchRecipes', myRecipes)
+  store.commit('watchRecipes', _.orderBy(myRecipes, 'createdAt', 'desc'))
 })
 
 export default {
