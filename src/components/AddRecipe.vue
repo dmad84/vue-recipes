@@ -74,6 +74,9 @@ export default {
       this.recipe = this.getRecipeByID(this.id)
       this.isEdit = true
     }
+    if (!this.recipe.steps) {
+      this.recipe.steps = []
+    }
   },
   methods: {
     addRecipe: function () {

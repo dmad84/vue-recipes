@@ -1,21 +1,27 @@
 <template>
- <div class="row justify-content-center">
+  <div class="row justify-content-center">
     <div class="col-12 col-md-8">
-        <article>
-            <h2>{{ recipe.name }}</h2>
+      <article>
+        <div class="media">
+          <img class="mr-3" :src="recipe.image" alt="Generic placeholder image">
+          <div class="media-body">
+            <h2 class="mt-0">{{ recipe.name }}</h2>
             <p>{{ recipe.details }}</p>
-            <ul v-for="(step, idx) in recipe.steps" :key="idx" v-if="recipe.steps && recipe.steps.length > 0">
-              <li>{{ idx+1 }}. {{ step }}</li>
-            </ul>
-        </article>
-        <router-link to="/">
-            <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
-        </router-link>
-       <router-link :to="{ path: '/EditRecipe/' + id }">
-            <button id="myButton" class="btn btn-primary">Edit</button>
-        </router-link>
+          </div>
+        </div>
+        <h3>Steps</h3>
+        <ul v-for="(step, idx) in recipe.steps" :key="idx" v-if="recipe.steps && recipe.steps.length > 0">
+          <li>{{ idx+1 }}. {{ step }}</li>
+        </ul>
+      </article>
+      <router-link to="/">
+        <button id="myButton" class="btn btn-secondary">Back to Recipes</button>
+      </router-link>
+      <router-link :to="{ path: '/EditRecipe/' + id }">
+        <button id="myButton" class="btn btn-primary">Edit</button>
+      </router-link>
     </div>
- </div>
+  </div>
 </template>
 
 <script>
@@ -45,5 +51,8 @@ export default {
   ul {
     list-style: none;
     padding: 0;
+  }
+  img {
+    width: 10%;
   }
 </style>
