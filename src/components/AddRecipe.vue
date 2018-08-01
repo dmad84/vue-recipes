@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-12 col-md-8">
     <h2>Add a new Recipe</h2>
       <transition name="fade">

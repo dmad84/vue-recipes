@@ -4,6 +4,9 @@
       <h1>{{ msg }}</h1>
       <h2>Recipes</h2>
       <input type="text" v-model="filter" class="form-control mb-4" placeholder="filter" ref="filter">
+       <router-link to="/addRecipe">
+        <button id="myButton" class="btn btn-primary float-right my-4" v-if="recipes.length > 15">Add Recipes</button>
+      </router-link>
       <table class="table" v-if="recipes.length > 0">
         <thead>
           <tr>
