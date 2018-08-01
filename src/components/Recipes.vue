@@ -3,6 +3,7 @@
     <div class="col-12 col-md-8">
       <h1>{{ msg }}</h1>
       <h2>Recipes</h2>
+      <input type="text" v-model="filter" class="form-control mb-4" placeholder="filter" ref="filter">
       <table class="table" v-if="recipes.length > 0">
         <thead>
           <tr>
@@ -15,34 +16,52 @@
         </thead>
         <tbody>
           <tr v-for="(recipe, idx) in recipes" :key="idx">
-            <td><img :src="recipe.image"></td>
-            <td><router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link></td>
+            <td>
+              <img :src="recipe.image">
+            </td>
+            <td>
+              <router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link>
+            </td>
             <td>{{ recipe.details }}</td>
             <td>{{ recipe.createdAt.toDate().toLocaleString() }}</td>
-            <td><span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)" title="delete recipe"></span></td>
+            <td>
+              <span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)" title="delete recipe"></span>
+            </td>
           </tr>
         </tbody>
       </table>
       <div class="loader" v-else></div>
       <router-link to="/addRecipe">
-            <button id="myButton" class="btn btn-primary float-right">Add Recipes</button>
-        </router-link>
+        <button id="myButton" class="btn btn-primary float-right">Add Recipes</button>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
+import store from '../store/index.js'
 
 export default {
   name: 'Recipes',
   data () {
     return {
-      msg: ''
+      msg: '',
+      filter: ''
     }
   },
-  computed: mapState(['recipes']),
-  methods: mapActions(['removeRecipe'])
+  computed: {
+    recipes: function () {
+      var filter = this.filter.trim().toLowerCase()
+      if (filter === '') return store.state.recipes
+      return store.state.recipes.filter(function (s) {
+        return s.name.toLowerCase().indexOf(filter) > -1
+      })
+    }
+  },
+  methods: {
+    ...mapActions(['removeRecipe'])
+  }
 }
 </script>
 
