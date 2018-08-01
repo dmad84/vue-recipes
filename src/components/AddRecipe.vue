@@ -75,16 +75,13 @@ export default {
       store.dispatch('addRecipe', this.recipe).then(() => {
         console.log('success')
         this.success = true
-        this.recipe = {
-          steps: ['']
-        }
         var self = this
         setTimeout(function () {
           self.success = false
-        }, 1000)
+        }, 2000)
         setTimeout(function () {
-          location.href = '/recipes'
-        }, 1005)
+          self.$router.push('/')
+        }, 2001)
       })
     },
     addStep: function () {
