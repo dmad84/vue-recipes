@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
-    <h2>Add a new Recipe</h2>
+    <h2>Add a new Recipe</h2> {{ file }}
       <transition name="fade">
         <div class="alert alert-success" role="alert" v-if="success">
           <i class="glyphicon glyphicon-ok"></i> Recipe has been successfully added
@@ -15,6 +15,10 @@
         <div class="form-group">
           <label for="details">Recipe Summary</label>
           <textarea class="form-control" rows="2" cols="50" v-model="recipe.details" id="details"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlFile1">upload photo</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" v-on:change="uploadFile">
         </div>
         <div class="form-group" v-for="(step, idx) in recipe.steps" :key="idx">
           <label :for="idx">Step {{idx+1}}</label>
@@ -47,6 +51,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import store from '../store/index.js'
+import firestore from '../store/firestore.js'
 
 export default {
   name: 'AddRecipe',
@@ -56,6 +61,7 @@ export default {
       recipe: {
         steps: ['']
       },
+      file: null,
       success: false,
       isEdit: false
     }
@@ -99,6 +105,20 @@ export default {
           self.success = false
         }, 3000)
       })
+    },
+    uploadFile: function (e) {
+      const img = {}
+      img.name = event.target.files[0].name
+      img.file = event.target.files[0]
+      firestore.uploadImage(img).then(storageSnapshot => {
+        this.updateUrl(storageSnapshot)
+      })
+    },
+    updateUrl: function (snapshot) {
+      snapshot.ref.getDownloadURL()
+        .then((url) => {
+          this.recipe.image = url
+        })
     }
   }
 }

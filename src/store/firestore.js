@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import 'firebase/storage'
 import 'firebase/firestore'
 import store from './'
 import _ from 'lodash'
@@ -21,6 +22,7 @@ firebase.firestore().settings(settings)
 const db = firebase.firestore()
 
 const recipes = db.collection('recipes')
+const ref = firebase.storage().ref()
 
 // Getting Real time feeds
 recipes.onSnapshot(querySnapshot => {
@@ -49,5 +51,8 @@ export default {
 
   removeRecipe: id => {
     return recipes.doc(id).delete()
+  },
+  uploadImage: image => {
+    return ref.child(image.name).put(image.file)
   }
 }
