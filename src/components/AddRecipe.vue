@@ -1,13 +1,13 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
-    <h2>Add a new Recipe</h2> {{ file }}
+    <h2>Add a new Recipe</h2>
       <transition name="fade">
         <div class="alert alert-success" role="alert" v-if="success">
           <i class="glyphicon glyphicon-ok"></i> Recipe has been successfully added
         </div>
       </transition>
-      <form>
+      <form v-if="recipe" >
         <div class="form-group">
           <label for="name">Recipe Title</label>
           <input type="text" class="form-control" v-model="recipe.name" id="name">
@@ -58,24 +58,26 @@ export default {
   props: ['id'],
   data () {
     return {
-      recipe: {
-        steps: ['']
-      },
       file: null,
       success: false,
       isEdit: false
     }
   },
   computed: {
-    ...mapGetters(['getRecipeByID'])
+    ...mapGetters(['getRecipeByID']),
+    recipe () {
+      if (this.id && this.id.length > 0) {
+        return this.getRecipeByID(this.id)
+      } else {
+        return {
+          steps: ['']
+        }
+      }
+    }
   },
   created () {
     if (this.id && this.id.length > 0) {
-      this.recipe = this.getRecipeByID(this.id)
       this.isEdit = true
-    }
-    if (!this.recipe.steps) {
-      this.recipe.steps = []
     }
   },
   methods: {

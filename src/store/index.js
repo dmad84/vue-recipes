@@ -30,7 +30,17 @@ export default new Vuex.Store({
   },
   getters: {
     getRecipeByID: (state) => (id) => {
-      return state.recipes.find(recipe => recipe.id === id)
+      if (state.recipes && state.recipes.length > 0) {
+        return state.recipes.find(recipe => recipe.id === id)
+      } else {
+        setTimeout(function () {
+          let recipe = null
+          firestore.getRecipeByID(id).then(doc => {
+            recipe = doc.data()
+          })
+          return recipe
+        }, 2000)
+      }
     }
   }
 })
