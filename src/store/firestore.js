@@ -40,15 +40,15 @@ export default {
   fetchRecipes: () => {
     return recipes.get()
   },
-
   addRecipe: (recipe) => {
     return recipes.add(recipe)
   },
-
+  getRecipeByID: (id) => {
+    return recipes.doc(id).get()
+  },
   updateRecipe: (recipe) => {
     return recipes.doc(recipe.id).set(recipe)
   },
-
   removeRecipe: id => {
     return recipes.doc(id).delete()
   },

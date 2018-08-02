@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" v-if="recipe">
     <div class="col-12 col-md-8">
       <article>
         <div class="media">
@@ -22,10 +22,11 @@
       </router-link>
     </div>
   </div>
+  <div class="loader" v-else></div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import firestore from '../store/firestore.js'
 
 export default {
   name: 'Recipe',
@@ -35,11 +36,15 @@ export default {
       recipe: null
     }
   },
-  computed: {
-    ...mapGetters(['getRecipeByID'])
-  },
   created () {
-    this.recipe = this.getRecipeByID(this.id)
+    this.getRecipeByID(this.id)
+  },
+  methods: {
+    getRecipeByID: function (id) {
+      firestore.getRecipeByID(id).then(doc => {
+        this.recipe = doc.data()
+      })
+    }
   }
 }
 </script>
