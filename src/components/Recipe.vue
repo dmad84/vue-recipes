@@ -63,8 +63,8 @@ export default {
   }
   @include media-breakpoint-up(sm) {
     img {
-    width: 30%;
-    max-width: 200px;
-  }
+      width: 30%;
+      max-width: 200px;
+    }
   }
 </style>
