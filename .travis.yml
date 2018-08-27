@@ -5,3 +5,7 @@ install:
 - npm install
 script:
 - npm run build
+deploy:
+  provider: heroku
+  api_key: 99d04936-471f-4be4-9841-8167a2778308
+  app: simple-vue-recipes
