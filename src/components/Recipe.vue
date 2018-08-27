@@ -58,7 +58,13 @@ export default {
     padding: 0;
   }
   img {
+    width: 50%;
+    max-width: 200px;
+  }
+  @include media-breakpoint-up(sm) {
+    img {
     width: 30%;
     max-width: 200px;
+  }
   }
 </style>
