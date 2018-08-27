@@ -58,6 +58,7 @@ export default {
     padding: 0;
   }
   img {
-    width: 10%;
+    width: 30%;
+    max-width: 200px;
   }
 </style>

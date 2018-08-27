@@ -85,6 +85,6 @@ a {
   cursor: pointer;
 }
 img {
-  width: 15px;
+  width: 100px;
 }
 </style>
