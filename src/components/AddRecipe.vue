@@ -5,7 +5,7 @@
     <h2 v-else>Add a new Recipe</h2>
       <transition name="fade">
         <div class="alert alert-success" role="alert" v-if="success">
-          <i class="glyphicon glyphicon-ok"></i> Recipe has been successfully added
+          <i class="glyphicon glyphicon-ok"></i> Recipe has been successfully saved
         </div>
       </transition>
       <form v-if="recipe" >
