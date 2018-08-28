@@ -1,7 +1,8 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
-    <h2>Add a new Recipe</h2>
+    <h2 v-if="isEdit">Edit Recipe</h2>
+    <h2 v-else>Add a new Recipe</h2>
       <transition name="fade">
         <div class="alert alert-success" role="alert" v-if="success">
           <i class="glyphicon glyphicon-ok"></i> Recipe has been successfully added
@@ -105,6 +106,7 @@ export default {
       store.dispatch('updateRecipe', this.recipe).then(() => {
         console.log('success')
         this.success = true
+        window.scrollTo(0, 0)
         var self = this
         setTimeout(function () {
           self.success = false
