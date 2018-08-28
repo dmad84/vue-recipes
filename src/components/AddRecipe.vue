@@ -61,23 +61,18 @@ export default {
     return {
       file: null,
       success: false,
-      isEdit: false
-    }
-  },
-  computed: {
-    ...mapGetters(['getRecipeByID']),
-    recipe () {
-      if (this.id && this.id.length > 0) {
-        return this.getRecipeByID(this.id)
-      } else {
-        return {
-          steps: ['']
-        }
+      isEdit: false,
+      recipe: {
+        steps: ['']
       }
     }
   },
+  computed: {
+    ...mapGetters(['getRecipeByID'])
+  },
   created () {
     if (this.id && this.id.length > 0) {
+      this.recipe = this.getRecipeByID(this.id)
       this.isEdit = true
     }
   },
