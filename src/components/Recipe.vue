@@ -50,9 +50,6 @@ export default {
 </script>
 
 <style scoped>
-.btn:hover {
-    color: #fff;
-  }
   ul {
     list-style: none;
     padding: 0;

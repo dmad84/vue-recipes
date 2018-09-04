@@ -32,4 +32,7 @@ export default {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+.btn:hover {
+    color: #fff;
+}
 </style>

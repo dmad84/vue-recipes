@@ -1,33 +1,33 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
-          </div>
+  <div class="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <slot name="header">
+            default header
+          </slot>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="$emit('close')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <slot name="body">
+            default body
+          </slot>
+        </div>
+        <div class="modal-footer">
+          <slot name="footer">
+            default footer
+            <button class="modal-default-button" @click="$emit('close')">
+              OK
+            </button>
+          </slot>
         </div>
       </div>
     </div>
-  </transition>
+  </div>
+</transition>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style>
-.modal-mask {
+.modal {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -54,7 +54,7 @@ export default {
   transition: opacity .3s ease;
 }
 
-.modal-wrapper {
+<!-- .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
@@ -68,9 +68,11 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
   font-family: Helvetica, Arial, sans-serif;
+} -->
+.modal-footer {
+  justify-content: initial;
 }
-
-.modal-header h3 {
+<!-- .modal-header h3 {
   margin-top: 0;
   color: #42b983;
 }
@@ -81,7 +83,7 @@ export default {
 
 .modal-default-button {
   float: right;
-}
+} -->
 
 /*
  * The following styles are auto-applied to elements with
