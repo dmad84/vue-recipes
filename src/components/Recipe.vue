@@ -9,6 +9,10 @@
             <p>{{ recipe.details }}</p>
           </div>
         </div>
+        <h3 v-if="recipe.ingredients && recipe.ingredients.length > 0">Ingredients</h3>
+        <ul v-for="(ingredient, key) in recipe.ingredients" :key="key + '.'" v-if="recipe.ingredients && recipe.ingredients.length > 0">
+          <li> {{ ingredient }}</li>
+        </ul>
         <h3>Steps</h3>
         <ul v-for="(step, idx) in recipe.steps" :key="idx" v-if="recipe.steps && recipe.steps.length > 0">
           <li>{{ idx+1 }}. {{ step }}</li>

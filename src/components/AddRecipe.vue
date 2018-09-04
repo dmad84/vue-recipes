@@ -21,7 +21,21 @@
           <label for="exampleFormControlFile1">upload photo</label>
           <input type="file" class="form-control-file" id="exampleFormControlFile1" v-on:change="uploadFile">
         </div>
-        <div class="form-group" v-for="(step, idx) in recipe.steps" :key="idx">
+        <div class="form-group" v-for="(ingredient, idx) in recipe.ingredients" :key="idx + '1'">
+          <label :for="idx + 'a'">Ingredient {{idx+1}}</label>
+          <input type="text" class="form-control" v-model="recipe.ingredients[idx]" v-bind:id="idx + 'a'">
+          <div class="row">
+            <div class="col-12 mt-2">
+              <button @click="removeIngredient(idx)" class="btn btn-outline-dark float-right" type="button"><i class="glyphicon glyphicon-trash"></i> Delete ingredient {{ idx+1 }}</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 form-group">
+            <button @click="addIngredient()" class="btn btn-outline-primary" type="button"><i class="glyphicon glyphicon-plus"></i>Add Ingredient</button>
+          </div>
+        </div>
+         <div class="form-group" v-for="(step, idx) in recipe.steps" :key="idx">
           <label :for="idx">Step {{idx+1}}</label>
           <textarea class="form-control" rows="4" cols="50" v-model="recipe.steps[idx]" v-bind:id="idx"></textarea>
           <div class="row">
@@ -63,7 +77,8 @@ export default {
       success: false,
       isEdit: false,
       recipe: {
-        steps: ['']
+        steps: [''],
+        ingredients: ['']
       }
     }
   },
@@ -72,6 +87,8 @@ export default {
   },
   created () {
     if (this.id && this.id.length > 0) {
+      console.log('id', this.id)
+      console.log('recipe', this.getRecipeByID(this.id))
       this.recipe = this.getRecipeByID(this.id)
       this.isEdit = true
     }
@@ -91,11 +108,17 @@ export default {
         }, 2001)
       })
     },
+    addIngredient: function () {
+      this.recipe.ingredients.push('')
+    },
     addStep: function () {
       this.recipe.steps.push('')
     },
     removeStep: function (index) {
       this.recipe.steps.splice(index, 1)
+    },
+    removeIngredient: function (index) {
+      this.recipe.ingredients.splice(index, 1)
     },
     updateRecipe: function () {
       store.dispatch('updateRecipe', this.recipe).then(() => {
