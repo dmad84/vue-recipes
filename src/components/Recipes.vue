@@ -13,20 +13,20 @@
             <th></th>
             <th>Recipe Name</th>
             <th>Details</th>
-            <th>created At</th>
+            <th class="hidden-xs hidden-sm">created At</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(recipe, idx) in recipes" :key="idx">
             <td>
-              <img v-if="recipe.image" :src="recipe.image">
+              <router-link :to="{ path: 'recipe/' + recipe.id }"><img v-if="recipe.image" :src="recipe.image"></router-link>
             </td>
             <td>
               <router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link>
             </td>
             <td>{{ recipe.details }}</td>
-            <td>{{ recipe.createdAt.toDate().toLocaleString() }}</td>
+            <td class="hidden-xs hidden-sm">{{ recipe.createdAt.toDate().toLocaleString() }}</td>
             <td>
               <!-- <span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)" title="delete recipe"></span> -->
               <span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="showModal(recipe)" title="delete recipe"></span>

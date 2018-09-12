@@ -3,7 +3,7 @@
     <div class="col-12 col-md-8">
       <article>
         <div class="media">
-          <img class="mr-3" :src="recipe.image" alt="Generic placeholder image">
+          <img v-if="recipe.image" class="mr-3" :src="recipe.image" alt="Generic placeholder image">
           <div class="media-body">
             <h2 class="mt-0">{{ recipe.name }}</h2>
             <p>{{ recipe.details }}</p>
