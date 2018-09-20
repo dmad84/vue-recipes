@@ -28,7 +28,7 @@
             <td>{{ recipe.details }}</td>
             <td class="hidden-xs hidden-sm">{{ recipe.createdAt.toDate().toLocaleString() }}</td>
             <td>
-               <button @click="showModal(recipe)" class="btn btn-outline-dark float-right" type="button"><i class="glyphicon glyphicon-trash"></i></button>
+              <span class="glyphicon glyphicon-trash" aria-hidden="true" @click="showModal(recipe)" title="delete recipe"></span>
             </td>
           </tr>
         </tbody>
