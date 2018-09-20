@@ -33,6 +33,6 @@ export default {
     100% { transform: rotate(360deg); }
 }
 .btn:hover {
-    color: #fff;
+    color: #fff !important;
 }
 </style>
