@@ -28,7 +28,6 @@
             <td>{{ recipe.details }}</td>
             <td class="hidden-xs hidden-sm">{{ recipe.createdAt.toDate().toLocaleString() }}</td>
             <td>
-              <!-- <span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="removeRecipe(recipe)" title="delete recipe"></span> -->
               <span class="glyphicon glyphicon-trash" aria-hidden="true" v-on:click="showModal(recipe)" title="delete recipe"></span>
             </td>
           </tr>
