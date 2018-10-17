@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueFire from 'vuefire'
+import VueLazyload from 'vue-lazyload'
 
 require('../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss')
 
 Vue.use(VueFire)
+Vue.use(VueLazyload)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

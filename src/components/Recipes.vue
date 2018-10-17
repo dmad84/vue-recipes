@@ -20,7 +20,7 @@
         <tbody>
           <tr v-for="(recipe, idx) in recipes" :key="idx">
             <td>
-              <router-link :to="{ path: 'recipe/' + recipe.id }"><img v-if="recipe.image" :src="recipe.image"></router-link>
+              <router-link :to="{ path: 'recipe/' + recipe.id }"><img v-if="recipe.image" v-lazy="recipe.image"></router-link>
             </td>
             <td>
               <router-link :to="{ path: 'recipe/' + recipe.id }">{{ recipe.name }}</router-link>
@@ -117,5 +117,6 @@ a {
 }
 img {
   width: 100px;
+  background: #cccccc;
 }
 </style>
